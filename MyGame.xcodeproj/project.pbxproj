@@ -25,6 +25,10 @@
 		C7A4570718F3A0520078B1C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DF18F3A0520078B1C5 /* UIKit.framework */; };
 		C7A4570F18F3A0520078B1C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7A4570D18F3A0520078B1C5 /* InfoPlist.strings */; };
 		C7A4571118F3A0520078B1C5 /* MyGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4571018F3A0520078B1C5 /* MyGameTests.m */; };
+		C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */; };
+		C7A4572018F3A1B70078B1C5 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */; };
+		C7A4572118F3A1B70078B1C5 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571E18F3A1B70078B1C5 /* sprites.atlas */; };
+		C7A4572418F3C7450078B1C5 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4572318F3C7450078B1C5 /* GameOverScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,11 @@
 		C7A4570C18F3A0520078B1C5 /* MyGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyGameTests-Info.plist"; sourceTree = "<group>"; };
 		C7A4570E18F3A0520078B1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7A4571018F3A0520078B1C5 /* MyGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyGameTests.m; sourceTree = "<group>"; };
+		C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
+		C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
+		C7A4571E18F3A1B70078B1C5 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		C7A4572218F3C7450078B1C5 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		C7A4572318F3C7450078B1C5 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +132,7 @@
 		C7A456E318F3A0520078B1C5 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
+				C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */,
 				C7A456EC18F3A0520078B1C5 /* AppDelegate.h */,
 				C7A456ED18F3A0520078B1C5 /* AppDelegate.m */,
 				C7A456EF18F3A0520078B1C5 /* Main_iPhone.storyboard */,
@@ -131,6 +141,8 @@
 				C7A456F618F3A0520078B1C5 /* ViewController.m */,
 				C7A456F818F3A0520078B1C5 /* MyScene.h */,
 				C7A456F918F3A0520078B1C5 /* MyScene.m */,
+				C7A4572218F3C7450078B1C5 /* GameOverScene.h */,
+				C7A4572318F3C7450078B1C5 /* GameOverScene.m */,
 				C7A456FB18F3A0520078B1C5 /* Spaceship.png */,
 				C7A456FD18F3A0520078B1C5 /* Images.xcassets */,
 				C7A456E418F3A0520078B1C5 /* Supporting Files */,
@@ -165,6 +177,24 @@
 				C7A4570D18F3A0520078B1C5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */ = {
+			isa = PBXGroup;
+			children = (
+				C7A4571B18F3A1B70078B1C5 /* Sounds */,
+				C7A4571E18F3A1B70078B1C5 /* sprites.atlas */,
+			);
+			path = SpriteKitSimpleGameResources;
+			sourceTree = "<group>";
+		};
+		C7A4571B18F3A1B70078B1C5 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */,
+				C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,8 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A4572018F3A1B70078B1C5 /* pew-pew-lei.caf in Resources */,
 				C7A456FC18F3A0520078B1C5 /* Spaceship.png in Resources */,
+				C7A4572118F3A1B70078B1C5 /* sprites.atlas in Resources */,
 				C7A456FE18F3A0520078B1C5 /* Images.xcassets in Resources */,
+				C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */,
 				C7A456F418F3A0520078B1C5 /* Main_iPad.storyboard in Resources */,
 				C7A456F118F3A0520078B1C5 /* Main_iPhone.storyboard in Resources */,
 				C7A456E818F3A0520078B1C5 /* InfoPlist.strings in Resources */,
@@ -266,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A4572418F3C7450078B1C5 /* GameOverScene.m in Sources */,
 				C7A456FA18F3A0520078B1C5 /* MyScene.m in Sources */,
 				C7A456F718F3A0520078B1C5 /* ViewController.m in Sources */,
 				C7A456EE18F3A0520078B1C5 /* AppDelegate.m in Sources */,
