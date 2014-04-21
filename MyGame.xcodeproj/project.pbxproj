@@ -20,6 +20,10 @@
 		C7094410190507E4009496C1 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C709440E190507E4009496C1 /* MainScene.m */; };
 		C7094413190507F0009496C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7094412190507F0009496C1 /* ViewController.m */; };
 		C709441B19050A79009496C1 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C709441A19050A79009496C1 /* AppConstants.m */; };
+		C709441D19052CAD009496C1 /* NewMonster.png in Resources */ = {isa = PBXBuildFile; fileRef = C709441C19052CAD009496C1 /* NewMonster.png */; };
+		C709441F19052F3B009496C1 /* warrior.png in Resources */ = {isa = PBXBuildFile; fileRef = C709441E19052F3B009496C1 /* warrior.png */; };
+		C70944211905307E009496C1 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = C70944201905307E009496C1 /* bomb.png */; };
+		C709442519053193009496C1 /* desert.png in Resources */ = {isa = PBXBuildFile; fileRef = C709442419053193009496C1 /* desert.png */; };
 		C7A456DC18F3A0520078B1C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DB18F3A0520078B1C5 /* Foundation.framework */; };
 		C7A456DE18F3A0520078B1C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */; };
 		C7A456E018F3A0520078B1C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DF18F3A0520078B1C5 /* UIKit.framework */; };
@@ -67,6 +71,10 @@
 		C7094412190507F0009496C1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Source/Controllers/ViewController.m; sourceTree = "<group>"; };
 		C709441919050A79009496C1 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppConstants.h; path = Source/App/AppConstants.h; sourceTree = "<group>"; };
 		C709441A19050A79009496C1 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppConstants.m; path = Source/App/AppConstants.m; sourceTree = "<group>"; };
+		C709441C19052CAD009496C1 /* NewMonster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NewMonster.png; path = sprites.atlas/NewMonster.png; sourceTree = "<group>"; };
+		C709441E19052F3B009496C1 /* warrior.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warrior.png; path = sprites.atlas/warrior.png; sourceTree = "<group>"; };
+		C70944201905307E009496C1 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bomb.png; path = sprites.atlas/bomb.png; sourceTree = "<group>"; };
+		C709442419053193009496C1 /* desert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = desert.png; path = sprites.atlas/desert.png; sourceTree = "<group>"; };
 		C7A456D818F3A0520078B1C5 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A456DB18F3A0520078B1C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -238,6 +246,10 @@
 		C7A4571A18F3A1B70078B1C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C709442419053193009496C1 /* desert.png */,
+				C70944201905307E009496C1 /* bomb.png */,
+				C709441E19052F3B009496C1 /* warrior.png */,
+				C709441C19052CAD009496C1 /* NewMonster.png */,
 				C70944011904F87F009496C1 /* explosion.png */,
 				C70943F31904F550009496C1 /* countryside_horse.png */,
 				C70943F41904F550009496C1 /* monster.png */,
@@ -341,16 +353,20 @@
 				C70943FD1904F550009496C1 /* player.png in Resources */,
 				C70943FA1904F550009496C1 /* countryside_horse.png in Resources */,
 				C70943FB1904F550009496C1 /* monster.png in Resources */,
+				C709441F19052F3B009496C1 /* warrior.png in Resources */,
 				C7A456FE18F3A0520078B1C5 /* Images.xcassets in Resources */,
+				C70944211905307E009496C1 /* bomb.png in Resources */,
 				C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */,
 				C70944001904F550009496C1 /* projectile@2x.png in Resources */,
 				C70943FE1904F550009496C1 /* player@2x.png in Resources */,
 				C70944021904F87F009496C1 /* explosion.png in Resources */,
 				C7A456F418F3A0520078B1C5 /* Main_iPad.storyboard in Resources */,
+				C709442519053193009496C1 /* desert.png in Resources */,
 				C7A456F118F3A0520078B1C5 /* Main_iPhone.storyboard in Resources */,
 				C7A456E818F3A0520078B1C5 /* InfoPlist.strings in Resources */,
 				C70943FF1904F550009496C1 /* projectile.png in Resources */,
 				C70943FC1904F550009496C1 /* monster@2x.png in Resources */,
+				C709441D19052CAD009496C1 /* NewMonster.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

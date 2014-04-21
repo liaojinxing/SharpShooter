@@ -13,11 +13,11 @@ NSString *const kHittedTime = @"HitTimes";
 NSString *const kHitTimesToKill = @"HitToKill";
 
 // image
-NSString *const kImageMonster = @"monster";
-NSString *const kImagePlayer = @"player";
-NSString *const kImageExplosion = @"explosion";
+NSString *const kImageMonster = @"NewMonster";
+NSString *const kImagePlayer = @"warrior";
+NSString *const kImageExplosion = @"bomb";
 NSString *const kImageProjectile = @"projectile";
-NSString *const kImageBackground = @"countryside_horse";
+NSString *const kImageBackground = @"desert";
 
 // sound
 NSString *const kSoundExplosion = @"pew-pew-lei.caf";
