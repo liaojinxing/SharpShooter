@@ -39,19 +39,25 @@ static inline CGPoint rwNormalize(CGPoint a)
 
 static const uint32_t projectileCategory     =  0x1 << 0;
 static const uint32_t monsterCategory        =  0x1 << 1;
-static const uint32_t bigMonsterCategory   =  0x1 << 2;
+static const uint32_t bigMonsterCategory     =  0x1 << 2;
 static const uint32_t superMonsterCategory   =  0x1 << 3;
 
-static const NSInteger kKillMonstersForWin = 1000;
-static const NSInteger kWillAppearBigMonster = 10;
-static const NSInteger kWillAppearSuperMonster = 27;
+static const NSInteger kKillMonstersForWin        = 1000;
+static const NSInteger kWillAppearBigMonster      = 10;
+static const NSInteger kWillAppearSuperMonster    = 27;
+static const NSInteger kWillAppearSuperProjectile = 13;
+
+static const NSInteger kDestroyedMonsterToLevel1    = 10;
+static const NSInteger kDestroyedMonsterToLevel2    = 30;
+static const NSInteger kDestroyedMonsterToLevel3    = 100;
 
 @interface MainScene () <SKPhysicsContactDelegate>
 
-@property (nonatomic) SKSpriteNode *player;
-@property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
-@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-@property (nonatomic) int monstersDestroyed;
+@property (nonatomic, strong) SKSpriteNode *player;
+@property (nonatomic, assign) NSTimeInterval lastSpawnTimeInterval;
+@property (nonatomic, assign) NSTimeInterval lastUpdateTimeInterval;
+@property (nonatomic, assign) int monstersDestroyed;
+@property (nonatomic, assign) int level;
 
 @end
 
@@ -59,6 +65,7 @@ static const NSInteger kWillAppearSuperMonster = 27;
 - (id)initWithSize:(CGSize)size
 {
   if (self = [super initWithSize:size]) {
+    self.level = 0;
     SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:kImageBackground];
     backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:backgroundNode];
@@ -85,8 +92,19 @@ static const NSInteger kWillAppearSuperMonster = 27;
   monster.position = CGPointMake(self.frame.size.width + monster.size.width / 2, actualY);
   [self addChild:monster];
 
-  int minDuration = 3.0;
-  int maxDuration = 5.0;
+  int minDuration = 3;
+  int maxDuration = 6;
+  
+  if (self.level >= 2) {
+    minDuration = 2;
+  }
+  if (self.level > 0) {
+    maxDuration = 5;
+  }
+  if (self.level >= 3) {
+    maxDuration = 4;
+  }
+  
   int rangeDuration = maxDuration - minDuration;
   int actualDuration = (arc4random() % rangeDuration) + minDuration;
 
@@ -95,7 +113,7 @@ static const NSInteger kWillAppearSuperMonster = 27;
 
   SKAction *loseAction = [SKAction runBlock:^{
                             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
+                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
                             [self.view presentScene:gameOverScene transition:reveal];
                           }];
   [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
@@ -154,23 +172,30 @@ static const NSInteger kWillAppearSuperMonster = 27;
 
   UITouch *touch = [touches anyObject];
   CGPoint location = [touch locationInNode:self];
+  CGPoint offset = rwSub(location, self.player.position);
+  if (offset.x <= 0) {
+    return;
+  }
+  
+  CGPoint direction = rwNormalize(offset);
+  [self addProjectileWithDirection:direction];
+}
 
+- (void)addProjectileWithDirection:(CGPoint)direction
+{
   SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithImageNamed:kImageProjectile];
   projectile.position = self.player.position;
-  CGPoint offset = rwSub(location, projectile.position);
-  if (offset.x <= 0) return;
-
+  
   [self addChild:projectile];
-  CGPoint direction = rwNormalize(offset);
   CGPoint shootAmount = rwMult(direction, 1000);
   CGPoint realDest = rwAdd(shootAmount, projectile.position);
-
-  float velocity = 1400.0 / 1.0;
+  
+  float velocity = 500 / 1.0;
   float realMoveDuration = self.size.width / velocity;
   SKAction *actionMove = [SKAction moveTo:realDest duration:realMoveDuration];
   SKAction *actionMoveDone = [SKAction removeFromParent];
   [projectile runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
-
+  
   projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width / 2];
   projectile.physicsBody.dynamic = YES;
   projectile.physicsBody.categoryBitMask = projectileCategory;
@@ -179,24 +204,61 @@ static const NSInteger kWillAppearSuperMonster = 27;
   projectile.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
+- (void)addSuperProjectile
+{
+  CGFloat x = 120, y = 0;
+  while (y < self.frame.size.height) {
+    CGPoint location = CGPointMake(x, y);
+    CGPoint offset = rwSub(location, self.player.position);
+    if (offset.x <= 0) {
+      return;
+    }
+    CGPoint direction = rwNormalize(offset);
+    [self addProjectileWithDirection:direction];
+    y += 10;
+  }
+}
+
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithMonster:(SKSpriteNode *)monster atPoint:(CGPoint)contactPoint
 {
   [self explosionAtCollidePoint:contactPoint];
-
   [projectile removeFromParent];
   [monster removeFromParent];
 
   self.monstersDestroyed++;
+  [self addBigEffect];
+  [self setLevelByMonstersDestroyed];
+  
+  if (self.monstersDestroyed > kKillMonstersForWin) {
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
+    [self.view presentScene:gameOverScene transition:reveal];
+  }
+}
+
+- (void)addBigEffect
+{
   if (self.monstersDestroyed % kWillAppearBigMonster == 0) {
     [self addBigMonster];
   }
   if (self.monstersDestroyed % kWillAppearSuperMonster == 0) {
     [self addSuperMonster];
   }
-  if (self.monstersDestroyed > kKillMonstersForWin) {
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES];
-    [self.view presentScene:gameOverScene transition:reveal];
+  if (self.monstersDestroyed % kWillAppearSuperProjectile == 0) {
+    [self addSuperProjectile];
+  }
+}
+
+- (void)setLevelByMonstersDestroyed
+{
+  if (self.monstersDestroyed >= kDestroyedMonsterToLevel3) {
+    self.level = 3;
+  } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel2) {
+    self.level = 2;
+  } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel1) {
+    self.level = 1;
+  } else {
+    self.level = 0;
   }
 }
 

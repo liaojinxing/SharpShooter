@@ -10,6 +10,6 @@
 
 @interface GameOverScene : SKScene
 
--(id)initWithSize:(CGSize)size won:(BOOL)won;
+-(id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums;
 
 @end

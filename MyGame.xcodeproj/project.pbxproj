@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				C709440319050727009496C1 /* Source */,
-				C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */,
+				C7A4571A18F3A1B70078B1C5 /* Resources */,
 				C7A456FD18F3A0520078B1C5 /* Images.xcassets */,
 				C7A456E418F3A0520078B1C5 /* Supporting Files */,
 			);
@@ -235,7 +235,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */ = {
+		C7A4571A18F3A1B70078B1C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				C70944011904F87F009496C1 /* explosion.png */,
@@ -248,6 +248,7 @@
 				C70943F91904F550009496C1 /* projectile@2x.png */,
 				C7A4571B18F3A1B70078B1C5 /* Sounds */,
 			);
+			name = Resources;
 			path = SpriteKitSimpleGameResources;
 			sourceTree = "<group>";
 		};
