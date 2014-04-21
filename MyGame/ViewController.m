@@ -26,13 +26,13 @@
   self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
   self.backgroundMusicPlayer.numberOfLoops = -1;
   [self.backgroundMusicPlayer prepareToPlay];
-  [self.backgroundMusicPlayer play];
+  //[self.backgroundMusicPlayer play];
   
   // Configure the view.
   SKView * skView = (SKView *)self.view;
   if (!skView.scene) {
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
     
     // Create and configure the scene.
     SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];

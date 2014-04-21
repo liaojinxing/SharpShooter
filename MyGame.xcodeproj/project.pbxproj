@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70943FA1904F550009496C1 /* countryside_horse.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F31904F550009496C1 /* countryside_horse.png */; };
+		C70943FB1904F550009496C1 /* monster.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F41904F550009496C1 /* monster.png */; };
+		C70943FC1904F550009496C1 /* monster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F51904F550009496C1 /* monster@2x.png */; };
+		C70943FD1904F550009496C1 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F61904F550009496C1 /* player.png */; };
+		C70943FE1904F550009496C1 /* player@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F71904F550009496C1 /* player@2x.png */; };
+		C70943FF1904F550009496C1 /* projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F81904F550009496C1 /* projectile.png */; };
+		C70944001904F550009496C1 /* projectile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F91904F550009496C1 /* projectile@2x.png */; };
+		C70944021904F87F009496C1 /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = C70944011904F87F009496C1 /* explosion.png */; };
 		C7A456DC18F3A0520078B1C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DB18F3A0520078B1C5 /* Foundation.framework */; };
 		C7A456DE18F3A0520078B1C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */; };
 		C7A456E018F3A0520078B1C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DF18F3A0520078B1C5 /* UIKit.framework */; };
@@ -27,7 +35,6 @@
 		C7A4571118F3A0520078B1C5 /* MyGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4571018F3A0520078B1C5 /* MyGameTests.m */; };
 		C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */; };
 		C7A4572018F3A1B70078B1C5 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */; };
-		C7A4572118F3A1B70078B1C5 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571E18F3A1B70078B1C5 /* sprites.atlas */; };
 		C7A4572418F3C7450078B1C5 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4572318F3C7450078B1C5 /* GameOverScene.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C70943F31904F550009496C1 /* countryside_horse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = countryside_horse.png; path = sprites.atlas/countryside_horse.png; sourceTree = "<group>"; };
+		C70943F41904F550009496C1 /* monster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster.png; path = sprites.atlas/monster.png; sourceTree = "<group>"; };
+		C70943F51904F550009496C1 /* monster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monster@2x.png"; path = "sprites.atlas/monster@2x.png"; sourceTree = "<group>"; };
+		C70943F61904F550009496C1 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player.png; path = sprites.atlas/player.png; sourceTree = "<group>"; };
+		C70943F71904F550009496C1 /* player@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "player@2x.png"; path = "sprites.atlas/player@2x.png"; sourceTree = "<group>"; };
+		C70943F81904F550009496C1 /* projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = projectile.png; path = sprites.atlas/projectile.png; sourceTree = "<group>"; };
+		C70943F91904F550009496C1 /* projectile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "projectile@2x.png"; path = "sprites.atlas/projectile@2x.png"; sourceTree = "<group>"; };
+		C70944011904F87F009496C1 /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion.png; path = sprites.atlas/explosion.png; sourceTree = "<group>"; };
 		C7A456D818F3A0520078B1C5 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A456DB18F3A0520078B1C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,7 +74,7 @@
 		C7A456F618F3A0520078B1C5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C7A456F818F3A0520078B1C5 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		C7A456F918F3A0520078B1C5 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		C7A456FB18F3A0520078B1C5 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		C7A456FB18F3A0520078B1C5 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Spaceship.png; path = ../Spaceship.png; sourceTree = "<group>"; };
 		C7A456FD18F3A0520078B1C5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C7A4570318F3A0520078B1C5 /* MyGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A4570418F3A0520078B1C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -68,7 +83,6 @@
 		C7A4571018F3A0520078B1C5 /* MyGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyGameTests.m; sourceTree = "<group>"; };
 		C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
-		C7A4571E18F3A1B70078B1C5 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		C7A4572218F3C7450078B1C5 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		C7A4572318F3C7450078B1C5 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +112,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C709440319050727009496C1 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C709440719050760009496C1 /* Util */,
+				C70944061905074D009496C1 /* App */,
+				C709440519050738009496C1 /* Scene */,
+				C70944041905072B009496C1 /* Controllers */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		C70944041905072B009496C1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C7A456EF18F3A0520078B1C5 /* Main_iPhone.storyboard */,
+				C7A456F218F3A0520078B1C5 /* Main_iPad.storyboard */,
+				C7A456F518F3A0520078B1C5 /* ViewController.h */,
+				C7A456F618F3A0520078B1C5 /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C709440519050738009496C1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				C7A456F818F3A0520078B1C5 /* MyScene.h */,
+				C7A456F918F3A0520078B1C5 /* MyScene.m */,
+				C7A4572218F3C7450078B1C5 /* GameOverScene.h */,
+				C7A4572318F3C7450078B1C5 /* GameOverScene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		C70944061905074D009496C1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C7A456EC18F3A0520078B1C5 /* AppDelegate.h */,
+				C7A456ED18F3A0520078B1C5 /* AppDelegate.m */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		C709440719050760009496C1 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		C7A456CF18F3A0520078B1C5 = {
 			isa = PBXGroup;
 			children = (
@@ -132,18 +195,8 @@
 		C7A456E318F3A0520078B1C5 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
+				C709440319050727009496C1 /* Source */,
 				C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */,
-				C7A456EC18F3A0520078B1C5 /* AppDelegate.h */,
-				C7A456ED18F3A0520078B1C5 /* AppDelegate.m */,
-				C7A456EF18F3A0520078B1C5 /* Main_iPhone.storyboard */,
-				C7A456F218F3A0520078B1C5 /* Main_iPad.storyboard */,
-				C7A456F518F3A0520078B1C5 /* ViewController.h */,
-				C7A456F618F3A0520078B1C5 /* ViewController.m */,
-				C7A456F818F3A0520078B1C5 /* MyScene.h */,
-				C7A456F918F3A0520078B1C5 /* MyScene.m */,
-				C7A4572218F3C7450078B1C5 /* GameOverScene.h */,
-				C7A4572318F3C7450078B1C5 /* GameOverScene.m */,
-				C7A456FB18F3A0520078B1C5 /* Spaceship.png */,
 				C7A456FD18F3A0520078B1C5 /* Images.xcassets */,
 				C7A456E418F3A0520078B1C5 /* Supporting Files */,
 			);
@@ -182,8 +235,16 @@
 		C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */ = {
 			isa = PBXGroup;
 			children = (
+				C7A456FB18F3A0520078B1C5 /* Spaceship.png */,
+				C70944011904F87F009496C1 /* explosion.png */,
+				C70943F31904F550009496C1 /* countryside_horse.png */,
+				C70943F41904F550009496C1 /* monster.png */,
+				C70943F51904F550009496C1 /* monster@2x.png */,
+				C70943F61904F550009496C1 /* player.png */,
+				C70943F71904F550009496C1 /* player@2x.png */,
+				C70943F81904F550009496C1 /* projectile.png */,
+				C70943F91904F550009496C1 /* projectile@2x.png */,
 				C7A4571B18F3A1B70078B1C5 /* Sounds */,
-				C7A4571E18F3A1B70078B1C5 /* sprites.atlas */,
 			);
 			path = SpriteKitSimpleGameResources;
 			sourceTree = "<group>";
@@ -274,13 +335,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7A4572018F3A1B70078B1C5 /* pew-pew-lei.caf in Resources */,
+				C70943FD1904F550009496C1 /* player.png in Resources */,
+				C70943FA1904F550009496C1 /* countryside_horse.png in Resources */,
+				C70943FB1904F550009496C1 /* monster.png in Resources */,
 				C7A456FC18F3A0520078B1C5 /* Spaceship.png in Resources */,
-				C7A4572118F3A1B70078B1C5 /* sprites.atlas in Resources */,
 				C7A456FE18F3A0520078B1C5 /* Images.xcassets in Resources */,
 				C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */,
+				C70944001904F550009496C1 /* projectile@2x.png in Resources */,
+				C70943FE1904F550009496C1 /* player@2x.png in Resources */,
+				C70944021904F87F009496C1 /* explosion.png in Resources */,
 				C7A456F418F3A0520078B1C5 /* Main_iPad.storyboard in Resources */,
 				C7A456F118F3A0520078B1C5 /* Main_iPhone.storyboard in Resources */,
 				C7A456E818F3A0520078B1C5 /* InfoPlist.strings in Resources */,
+				C70943FF1904F550009496C1 /* projectile.png in Resources */,
+				C70943FC1904F550009496C1 /* monster@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +509,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyGame/MyGame-Prefix.pch";
 				INFOPLIST_FILE = "MyGame/MyGame-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -455,6 +524,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyGame/MyGame-Prefix.pch";
 				INFOPLIST_FILE = "MyGame/MyGame-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -520,6 +590,7 @@
 				C7A4571618F3A0520078B1C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C7A4571718F3A0520078B1C5 /* Build configuration list for PBXNativeTarget "MyGameTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +599,7 @@
 				C7A4571918F3A0520078B1C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

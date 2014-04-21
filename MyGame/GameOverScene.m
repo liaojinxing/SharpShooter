@@ -12,18 +12,15 @@
 - (id)initWithSize:(CGSize)size won:(BOOL)won
 {
   if (self = [super initWithSize:size]) {
-    // 1
     self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 
-    // 2
     NSString *message;
     if (won) {
-      message = @"You Won!";
+      message = @"老鹰都被你打跑了耶";
     } else {
-      message = @"You Lose :[";
+      message = @"啊哦，小鸡都被老鹰抓走了 :[";
     }
 
-    // 3
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     label.text = message;
     label.fontSize = 40;
@@ -31,7 +28,6 @@
     label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
     [self addChild:label];
 
-    // 4
     [self runAction:
      [SKAction sequence:@[
         [SKAction waitForDuration:3.0],
