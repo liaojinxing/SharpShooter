@@ -39,10 +39,12 @@ static inline CGPoint rwNormalize(CGPoint a)
 
 static const uint32_t projectileCategory     =  0x1 << 0;
 static const uint32_t monsterCategory        =  0x1 << 1;
-static const uint32_t superMonsterCategory   =  0x1 << 2;
+static const uint32_t bigMonsterCategory   =  0x1 << 2;
+static const uint32_t superMonsterCategory   =  0x1 << 3;
 
-static const NSInteger kKillMonstersForWin = 100;
-static const NSInteger kWillAppearSuperMonster = 10;
+static const NSInteger kKillMonstersForWin = 1000;
+static const NSInteger kWillAppearBigMonster = 10;
+static const NSInteger kWillAppearSuperMonster = 27;
 
 @interface MainScene () <SKPhysicsContactDelegate>
 
@@ -79,31 +81,31 @@ static const NSInteger kWillAppearSuperMonster = 10;
   int maxY = self.frame.size.height - monster.size.height / 2;
   int rangeY = maxY - minY;
   int actualY = (arc4random() % rangeY) + minY;
-  
+
   monster.position = CGPointMake(self.frame.size.width + monster.size.width / 2, actualY);
   [self addChild:monster];
-  
+
   int minDuration = 3.0;
   int maxDuration = 5.0;
   int rangeDuration = maxDuration - minDuration;
   int actualDuration = (arc4random() % rangeDuration) + minDuration;
-  
+
   SKAction *actionMove = [SKAction moveTo:CGPointMake(-monster.size.width / 2, actualY) duration:actualDuration];
   SKAction *actionMoveDone = [SKAction removeFromParent];
-  
+
   SKAction *loseAction = [SKAction runBlock:^{
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
-    [self.view presentScene:gameOverScene transition:reveal];
-  }];
+                            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
+                            [self.view presentScene:gameOverScene transition:reveal];
+                          }];
   [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
-  
+
   monster.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monster.size];
   monster.physicsBody.dynamic = YES;
   monster.physicsBody.categoryBitMask = 0x1 << power;
   monster.physicsBody.contactTestBitMask = projectileCategory;
   monster.physicsBody.collisionBitMask = 0;
-  
+
   NSMutableDictionary *userData = [NSMutableDictionary dictionary];
   [userData setObject:@(0) forKey:kHittedTime];
   [userData setObject:@(power) forKey:kHitTimesToKill];
@@ -115,9 +117,14 @@ static const NSInteger kWillAppearSuperMonster = 10;
   [self addMonsterWithPower:1];
 }
 
-- (void)addSuperMonster
+- (void)addBigMonster
 {
   [self addMonsterWithPower:2];
+}
+
+- (void)addSuperMonster
+{
+  [self addMonsterWithPower:3];
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
@@ -167,7 +174,7 @@ static const NSInteger kWillAppearSuperMonster = 10;
   projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width / 2];
   projectile.physicsBody.dynamic = YES;
   projectile.physicsBody.categoryBitMask = projectileCategory;
-  projectile.physicsBody.contactTestBitMask = monsterCategory | superMonsterCategory;
+  projectile.physicsBody.contactTestBitMask = monsterCategory | bigMonsterCategory | superMonsterCategory;
   projectile.physicsBody.collisionBitMask = 0;
   projectile.physicsBody.usesPreciseCollisionDetection = YES;
 }
@@ -180,6 +187,9 @@ static const NSInteger kWillAppearSuperMonster = 10;
   [monster removeFromParent];
 
   self.monstersDestroyed++;
+  if (self.monstersDestroyed % kWillAppearBigMonster == 0) {
+    [self addBigMonster];
+  }
   if (self.monstersDestroyed % kWillAppearSuperMonster == 0) {
     [self addSuperMonster];
   }
@@ -214,18 +224,19 @@ static const NSInteger kWillAppearSuperMonster = 10;
     firstBody = contact.bodyB;
     secondBody = contact.bodyA;
   }
-  
-  if (secondBody.categoryBitMask & superMonsterCategory) {
+
+  if (secondBody.categoryBitMask & bigMonsterCategory || secondBody.categoryBitMask & superMonsterCategory) {
     NSMutableDictionary *userData = secondBody.node.userData;
+    NSNumber *hitToKill = [userData objectForKey:kHitTimesToKill];
     NSNumber *hitTime = [userData objectForKey:kHittedTime];
-    if (hitTime.integerValue == 0) {
-      [secondBody.node.userData setObject:@(1) forKey:kHittedTime];
+    if (hitTime.integerValue < hitToKill.integerValue - 1) {
+      [secondBody.node.userData setObject:[NSNumber numberWithInteger:hitTime.integerValue + 1] forKey:kHittedTime];
       [self explosionAtCollidePoint:contact.contactPoint];
     } else {
       if ((firstBody.categoryBitMask & projectileCategory) != 0) {
         [self projectile:(SKSpriteNode *)firstBody.node
-   didCollideWithMonster:(SKSpriteNode *)secondBody.node
-                 atPoint:contact.contactPoint];
+          didCollideWithMonster:(SKSpriteNode *)secondBody.node
+                        atPoint:contact.contactPoint];
       }
     }
   }
