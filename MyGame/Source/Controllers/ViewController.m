@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "MainScene.h"
+#import "AppConstants.h"
 @import AVFoundation;
 
 
@@ -22,7 +23,7 @@
   [super viewWillLayoutSubviews];
   
   NSError *error;
-  NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"background-music-aac" withExtension:@"caf"];
+  NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:kSoundBackground withExtension:@"caf"];
   self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
   self.backgroundMusicPlayer.numberOfLoops = -1;
   [self.backgroundMusicPlayer prepareToPlay];
@@ -35,7 +36,7 @@
     skView.showsNodeCount = NO;
     
     // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [MainScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

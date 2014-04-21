@@ -6,6 +6,9 @@
 //  Copyright (c) 2014年 jinxing. All rights reserved.
 //
 
+#import "MainScene.h"
+#import "GameOverScene.h"
+#import "AppConstants.h"
 
 static inline CGPoint rwAdd(CGPoint a, CGPoint b)
 {
@@ -39,31 +42,26 @@ static const uint32_t monsterCategory        =  0x1 << 1;
 static const uint32_t superMonsterCategory   =  0x1 << 2;
 
 static const NSInteger kKillMonstersForWin = 100;
-static const NSInteger kWillAppearSuperMonster = 3;
+static const NSInteger kWillAppearSuperMonster = 10;
 
-#import "MyScene.h"
-#import "GameOverScene.h"
-
-@interface MyScene () <SKPhysicsContactDelegate>
+@interface MainScene () <SKPhysicsContactDelegate>
 
 @property (nonatomic) SKSpriteNode *player;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) int monstersDestroyed;
 
-
 @end
 
-@implementation MyScene
+@implementation MainScene
 - (id)initWithSize:(CGSize)size
 {
   if (self = [super initWithSize:size]) {
-    SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:@"countryside_horse"];
+    SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:kImageBackground];
     backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    backgroundNode.name = @"background";
     [self addChild:backgroundNode];
 
-    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"player"];
+    self.player = [SKSpriteNode spriteNodeWithImageNamed:kImagePlayer];
     self.player.position = CGPointMake(self.player.size.width / 2, self.frame.size.height / 2);
     [self addChild:self.player];
 
@@ -73,75 +71,53 @@ static const NSInteger kWillAppearSuperMonster = 3;
   return self;
 }
 
-- (void)addMonster
+- (void)addMonsterWithPower:(NSInteger)power
 {
-  SKSpriteNode *monster = [SKSpriteNode spriteNodeWithImageNamed:@"monster"];
-
+  SKSpriteNode *monster = [SKSpriteNode spriteNodeWithImageNamed:kImageMonster];
+  [monster setSize:CGSizeMake(monster.size.width * power, monster.size.height * power)];
   int minY = monster.size.height / 2;
   int maxY = self.frame.size.height - monster.size.height / 2;
   int rangeY = maxY - minY;
   int actualY = (arc4random() % rangeY) + minY;
-
+  
   monster.position = CGPointMake(self.frame.size.width + monster.size.width / 2, actualY);
   [self addChild:monster];
-
+  
   int minDuration = 3.0;
   int maxDuration = 5.0;
   int rangeDuration = maxDuration - minDuration;
   int actualDuration = (arc4random() % rangeDuration) + minDuration;
-
+  
   SKAction *actionMove = [SKAction moveTo:CGPointMake(-monster.size.width / 2, actualY) duration:actualDuration];
   SKAction *actionMoveDone = [SKAction removeFromParent];
-
+  
   SKAction *loseAction = [SKAction runBlock:^{
-                            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
-                            [self.view presentScene:gameOverScene transition:reveal];
-                          }];
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
+    [self.view presentScene:gameOverScene transition:reveal];
+  }];
   [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
-
+  
   monster.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monster.size];
   monster.physicsBody.dynamic = YES;
-  monster.physicsBody.categoryBitMask = monsterCategory;
+  monster.physicsBody.categoryBitMask = 0x1 << power;
   monster.physicsBody.contactTestBitMask = projectileCategory;
   monster.physicsBody.collisionBitMask = 0;
+  
+  NSMutableDictionary *userData = [NSMutableDictionary dictionary];
+  [userData setObject:@(0) forKey:kHittedTime];
+  [userData setObject:@(power) forKey:kHitTimesToKill];
+  monster.userData = userData;
+}
+
+- (void)addMonster
+{
+  [self addMonsterWithPower:1];
 }
 
 - (void)addSuperMonster
 {
-  SKSpriteNode *monster = [SKSpriteNode spriteNodeWithImageNamed:@"monster"];
-  [monster setSize:CGSizeMake(monster.size.width * 2, monster.size.height * 2)];
-  int minY = monster.size.height / 2;
-  int maxY = self.frame.size.height - monster.size.height / 2;
-  int rangeY = maxY - minY;
-  int actualY = (arc4random() % rangeY) + minY;
-
-  monster.position = CGPointMake(self.frame.size.width + monster.size.width / 2, actualY);
-  [self addChild:monster];
-
-  int minDuration = 3.0;
-  int maxDuration = 5.0;
-  int rangeDuration = maxDuration - minDuration;
-  int actualDuration = (arc4random() % rangeDuration) + minDuration;
-
-  SKAction *actionMove = [SKAction moveTo:CGPointMake(-monster.size.width / 2, actualY) duration:actualDuration];
-  SKAction *actionMoveDone = [SKAction removeFromParent];
-
-  SKAction *loseAction = [SKAction runBlock:^{
-                            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
-                            [self.view presentScene:gameOverScene transition:reveal];
-                          }];
-  [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
-
-  monster.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monster.size];
-  monster.physicsBody.dynamic = YES;
-  monster.physicsBody.categoryBitMask = superMonsterCategory;
-  monster.physicsBody.contactTestBitMask = projectileCategory;
-  monster.physicsBody.collisionBitMask = 0;
-  
-  NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithObject:@(0) forKey:@"HitTimes"];
-  monster.userData = userData;
+  [self addMonsterWithPower:2];
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
@@ -167,12 +143,12 @@ static const NSInteger kWillAppearSuperMonster = 3;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-  [self runAction:[SKAction playSoundFileNamed:@"pew-pew-lei.caf" waitForCompletion:NO]];
+  [self runAction:[SKAction playSoundFileNamed:kSoundExplosion waitForCompletion:NO]];
 
   UITouch *touch = [touches anyObject];
   CGPoint location = [touch locationInNode:self];
 
-  SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithImageNamed:@"projectile"];
+  SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithImageNamed:kImageProjectile];
   projectile.position = self.player.position;
   CGPoint offset = rwSub(location, projectile.position);
   if (offset.x <= 0) return;
@@ -216,7 +192,7 @@ static const NSInteger kWillAppearSuperMonster = 3;
 
 - (void)explosionAtCollidePoint:(CGPoint)point
 {
-  SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:@"explosion"];
+  SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:kImageExplosion];
   explosion.position = point;
 
   [self addChild:explosion];
@@ -241,9 +217,9 @@ static const NSInteger kWillAppearSuperMonster = 3;
   
   if (secondBody.categoryBitMask & superMonsterCategory) {
     NSMutableDictionary *userData = secondBody.node.userData;
-    NSNumber *hitTime = [userData objectForKey:@"HitTimes"];
+    NSNumber *hitTime = [userData objectForKey:kHittedTime];
     if (hitTime.integerValue == 0) {
-      [secondBody.node.userData setObject:@(1) forKey:@"HitTimes"];
+      [secondBody.node.userData setObject:@(1) forKey:kHittedTime];
       [self explosionAtCollidePoint:contact.contactPoint];
     } else {
       if ((firstBody.categoryBitMask & projectileCategory) != 0) {

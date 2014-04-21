@@ -15,18 +15,19 @@
 		C70943FF1904F550009496C1 /* projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F81904F550009496C1 /* projectile.png */; };
 		C70944001904F550009496C1 /* projectile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C70943F91904F550009496C1 /* projectile@2x.png */; };
 		C70944021904F87F009496C1 /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = C70944011904F87F009496C1 /* explosion.png */; };
+		C709440A190507D9009496C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7094409190507D9009496C1 /* AppDelegate.m */; };
+		C709440F190507E4009496C1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C709440C190507E4009496C1 /* GameOverScene.m */; };
+		C7094410190507E4009496C1 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C709440E190507E4009496C1 /* MainScene.m */; };
+		C7094413190507F0009496C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7094412190507F0009496C1 /* ViewController.m */; };
+		C709441B19050A79009496C1 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C709441A19050A79009496C1 /* AppConstants.m */; };
 		C7A456DC18F3A0520078B1C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DB18F3A0520078B1C5 /* Foundation.framework */; };
 		C7A456DE18F3A0520078B1C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */; };
 		C7A456E018F3A0520078B1C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DF18F3A0520078B1C5 /* UIKit.framework */; };
 		C7A456E218F3A0520078B1C5 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456E118F3A0520078B1C5 /* SpriteKit.framework */; };
 		C7A456E818F3A0520078B1C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7A456E618F3A0520078B1C5 /* InfoPlist.strings */; };
 		C7A456EA18F3A0520078B1C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A456E918F3A0520078B1C5 /* main.m */; };
-		C7A456EE18F3A0520078B1C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A456ED18F3A0520078B1C5 /* AppDelegate.m */; };
 		C7A456F118F3A0520078B1C5 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7A456EF18F3A0520078B1C5 /* Main_iPhone.storyboard */; };
 		C7A456F418F3A0520078B1C5 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7A456F218F3A0520078B1C5 /* Main_iPad.storyboard */; };
-		C7A456F718F3A0520078B1C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A456F618F3A0520078B1C5 /* ViewController.m */; };
-		C7A456FA18F3A0520078B1C5 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A456F918F3A0520078B1C5 /* MyScene.m */; };
-		C7A456FC18F3A0520078B1C5 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A456FB18F3A0520078B1C5 /* Spaceship.png */; };
 		C7A456FE18F3A0520078B1C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7A456FD18F3A0520078B1C5 /* Images.xcassets */; };
 		C7A4570518F3A0520078B1C5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A4570418F3A0520078B1C5 /* XCTest.framework */; };
 		C7A4570618F3A0520078B1C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A456DB18F3A0520078B1C5 /* Foundation.framework */; };
@@ -35,7 +36,6 @@
 		C7A4571118F3A0520078B1C5 /* MyGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4571018F3A0520078B1C5 /* MyGameTests.m */; };
 		C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */; };
 		C7A4572018F3A1B70078B1C5 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */; };
-		C7A4572418F3C7450078B1C5 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A4572318F3C7450078B1C5 /* GameOverScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +57,16 @@
 		C70943F81904F550009496C1 /* projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = projectile.png; path = sprites.atlas/projectile.png; sourceTree = "<group>"; };
 		C70943F91904F550009496C1 /* projectile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "projectile@2x.png"; path = "sprites.atlas/projectile@2x.png"; sourceTree = "<group>"; };
 		C70944011904F87F009496C1 /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion.png; path = sprites.atlas/explosion.png; sourceTree = "<group>"; };
+		C7094408190507D9009496C1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/App/AppDelegate.h; sourceTree = "<group>"; };
+		C7094409190507D9009496C1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/App/AppDelegate.m; sourceTree = "<group>"; };
+		C709440B190507E4009496C1 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameOverScene.h; path = Source/Scene/GameOverScene.h; sourceTree = "<group>"; };
+		C709440C190507E4009496C1 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameOverScene.m; path = Source/Scene/GameOverScene.m; sourceTree = "<group>"; };
+		C709440D190507E4009496C1 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Source/Scene/MainScene.h; sourceTree = "<group>"; };
+		C709440E190507E4009496C1 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainScene.m; path = Source/Scene/MainScene.m; sourceTree = "<group>"; };
+		C7094411190507F0009496C1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Source/Controllers/ViewController.h; sourceTree = "<group>"; };
+		C7094412190507F0009496C1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Source/Controllers/ViewController.m; sourceTree = "<group>"; };
+		C709441919050A79009496C1 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppConstants.h; path = Source/App/AppConstants.h; sourceTree = "<group>"; };
+		C709441A19050A79009496C1 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppConstants.m; path = Source/App/AppConstants.m; sourceTree = "<group>"; };
 		C7A456D818F3A0520078B1C5 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A456DB18F3A0520078B1C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C7A456DD18F3A0520078B1C5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,15 +76,8 @@
 		C7A456E718F3A0520078B1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7A456E918F3A0520078B1C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C7A456EB18F3A0520078B1C5 /* MyGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyGame-Prefix.pch"; sourceTree = "<group>"; };
-		C7A456EC18F3A0520078B1C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C7A456ED18F3A0520078B1C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C7A456F018F3A0520078B1C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		C7A456F318F3A0520078B1C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		C7A456F518F3A0520078B1C5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C7A456F618F3A0520078B1C5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C7A456F818F3A0520078B1C5 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
-		C7A456F918F3A0520078B1C5 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		C7A456FB18F3A0520078B1C5 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Spaceship.png; path = ../Spaceship.png; sourceTree = "<group>"; };
 		C7A456FD18F3A0520078B1C5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C7A4570318F3A0520078B1C5 /* MyGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A4570418F3A0520078B1C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -83,8 +86,6 @@
 		C7A4571018F3A0520078B1C5 /* MyGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyGameTests.m; sourceTree = "<group>"; };
 		C7A4571C18F3A1B70078B1C5 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		C7A4571D18F3A1B70078B1C5 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
-		C7A4572218F3C7450078B1C5 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
-		C7A4572318F3C7450078B1C5 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +127,10 @@
 		C70944041905072B009496C1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C7094411190507F0009496C1 /* ViewController.h */,
+				C7094412190507F0009496C1 /* ViewController.m */,
 				C7A456EF18F3A0520078B1C5 /* Main_iPhone.storyboard */,
 				C7A456F218F3A0520078B1C5 /* Main_iPad.storyboard */,
-				C7A456F518F3A0520078B1C5 /* ViewController.h */,
-				C7A456F618F3A0520078B1C5 /* ViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -137,10 +138,10 @@
 		C709440519050738009496C1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				C7A456F818F3A0520078B1C5 /* MyScene.h */,
-				C7A456F918F3A0520078B1C5 /* MyScene.m */,
-				C7A4572218F3C7450078B1C5 /* GameOverScene.h */,
-				C7A4572318F3C7450078B1C5 /* GameOverScene.m */,
+				C709440B190507E4009496C1 /* GameOverScene.h */,
+				C709440C190507E4009496C1 /* GameOverScene.m */,
+				C709440D190507E4009496C1 /* MainScene.h */,
+				C709440E190507E4009496C1 /* MainScene.m */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -148,8 +149,10 @@
 		C70944061905074D009496C1 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				C7A456EC18F3A0520078B1C5 /* AppDelegate.h */,
-				C7A456ED18F3A0520078B1C5 /* AppDelegate.m */,
+				C7094408190507D9009496C1 /* AppDelegate.h */,
+				C7094409190507D9009496C1 /* AppDelegate.m */,
+				C709441919050A79009496C1 /* AppConstants.h */,
+				C709441A19050A79009496C1 /* AppConstants.m */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -235,7 +238,6 @@
 		C7A4571A18F3A1B70078B1C5 /* SpriteKitSimpleGameResources */ = {
 			isa = PBXGroup;
 			children = (
-				C7A456FB18F3A0520078B1C5 /* Spaceship.png */,
 				C70944011904F87F009496C1 /* explosion.png */,
 				C70943F31904F550009496C1 /* countryside_horse.png */,
 				C70943F41904F550009496C1 /* monster.png */,
@@ -338,7 +340,6 @@
 				C70943FD1904F550009496C1 /* player.png in Resources */,
 				C70943FA1904F550009496C1 /* countryside_horse.png in Resources */,
 				C70943FB1904F550009496C1 /* monster.png in Resources */,
-				C7A456FC18F3A0520078B1C5 /* Spaceship.png in Resources */,
 				C7A456FE18F3A0520078B1C5 /* Images.xcassets in Resources */,
 				C7A4571F18F3A1B70078B1C5 /* background-music-aac.caf in Resources */,
 				C70944001904F550009496C1 /* projectile@2x.png in Resources */,
@@ -367,11 +368,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7A4572418F3C7450078B1C5 /* GameOverScene.m in Sources */,
-				C7A456FA18F3A0520078B1C5 /* MyScene.m in Sources */,
-				C7A456F718F3A0520078B1C5 /* ViewController.m in Sources */,
-				C7A456EE18F3A0520078B1C5 /* AppDelegate.m in Sources */,
+				C7094410190507E4009496C1 /* MainScene.m in Sources */,
+				C709440A190507D9009496C1 /* AppDelegate.m in Sources */,
+				C709440F190507E4009496C1 /* GameOverScene.m in Sources */,
+				C709441B19050A79009496C1 /* AppConstants.m in Sources */,
 				C7A456EA18F3A0520078B1C5 /* main.m in Sources */,
+				C7094413190507F0009496C1 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
