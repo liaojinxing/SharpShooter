@@ -14,7 +14,7 @@ NSString *const kHitTimesToKill = @"HitToKill";
 
 // image
 NSString *const kImageMonster = @"NewMonster";
-NSString *const kImagePlayer = @"warrior";
+NSString *const kImagePlayer = @"player";
 NSString *const kImageExplosion = @"bomb";
 NSString *const kImageProjectile = @"projectile";
 NSString *const kImageBackground = @"desert";

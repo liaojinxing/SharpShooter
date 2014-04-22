@@ -56,7 +56,7 @@ static const NSInteger kProjectileTotal = 50;
 @interface MainScene () <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong) SKSpriteNode *player;
-@property (nonatomic, strong) SKLabelNode *progressLabel;
+@property (nonatomic, strong) SKLabelNode *projectileLabel;
 @property (nonatomic, assign) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic, assign) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic, assign) int monstersDestroyed;
@@ -70,14 +70,12 @@ static const NSInteger kProjectileTotal = 50;
 - (id)initWithSize:(CGSize)size
 {
   if (self = [super initWithSize:size]) {
+    self.backgroundColor = [SKColor colorWithRed:0.2 green:0.4 blue:0.2 alpha:1.0];
+
     self.level = 0;
     self.projectileUsed = 0;
     self.projectileTotal = kProjectileTotal;
-    SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:kImageBackground];
-    backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    backgroundNode.size = size;
-    [self addChild:backgroundNode];
-
+    
     self.player = [SKSpriteNode spriteNodeWithImageNamed:kImagePlayer];
     self.player.position = CGPointMake(self.player.size.width / 2, self.frame.size.height / 2);
     [self addChild:self.player];
@@ -91,18 +89,19 @@ static const NSInteger kProjectileTotal = 50;
 
 - (void)addProgressBar
 {
-  self.progressLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-  self.progressLabel.fontSize = 17;
-  self.progressLabel.fontColor = [SKColor blackColor];
-  self.progressLabel.position = CGPointMake(self.frame.size.width - 40, self.frame.size.height - 20);
-  [self addChild:self.progressLabel];
+  self.projectileLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+  self.projectileLabel.fontSize = 16;
+  self.projectileLabel.fontColor = [SKColor whiteColor];
+  self.projectileLabel.position = CGPointMake(100, self.frame.size.height - 20);
+  [self addChild:self.projectileLabel];
   [self updateProgressBar];
 }
 
 - (void)updateProgressBar
 {
-  NSString *text = [NSString stringWithFormat:@"%d/%d", self.projectileUsed, self.projectileTotal];
-  self.progressLabel.text = text;
+  NSString *text = [NSString stringWithFormat:@"击落%d怪兽,子弹:%d/%d",
+                    self.monstersDestroyed,self.projectileUsed, self.projectileTotal];
+  self.projectileLabel.text = text;
 }
 
 - (void)addMonsterWithPower:(NSInteger)power
@@ -262,7 +261,7 @@ static const NSInteger kProjectileTotal = 50;
     [self addSuperProjectile];
   }
   if (self.monstersDestroyed % 40 == 0) {
-    if (self.monstersDestroyed * 1.0 / self.projectileUsed < 1.4) {
+    if (self.monstersDestroyed * 1.0 / self.projectileUsed <= 1.05) {
       [self addProjectileNum:kProjectileTotal];
     }
   }
@@ -282,7 +281,6 @@ static const NSInteger kProjectileTotal = 50;
     [self addProjectileNum:kProjectileTotal * 2];
   } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel2) {
     self.level = 2;
-    [self addProjectileNum:kProjectileTotal];
   } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel1) {
     self.level = 1;
   } else {

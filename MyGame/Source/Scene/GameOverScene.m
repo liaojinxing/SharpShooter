@@ -21,8 +21,10 @@
         break;
       case kProjectileUseUp:
         reasonString = @"啊哦，没有更多的子弹了";
+        break;
       case kLoseMonster:
         reasonString = @"哦漏，怪兽都跑家里来了";
+        break;
       default:
         break;
     }
@@ -34,7 +36,7 @@
     [self addChild:reasonLabel];
     
     SKLabelNode *countLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    countLabel.text = [NSString stringWithFormat:@"你击落了%ld只怪兽！", hitNums];;
+    countLabel.text = [NSString stringWithFormat:@"你击落了%d只怪兽！", hitNums];;
     countLabel.fontSize = 30;
     countLabel.fontColor = [SKColor blackColor];
     countLabel.position = CGPointMake(self.size.width / 2, self.size.height / 2 - 40);
