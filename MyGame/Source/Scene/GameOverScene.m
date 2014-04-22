@@ -14,7 +14,7 @@
   if (self = [super initWithSize:size]) {
     self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 
-    NSString *message = [NSString stringWithFormat:@"你击落了%d 只怪兽！", hitNums];
+    NSString *message = [NSString stringWithFormat:@"你击落了%ld 只怪兽！", hitNums];
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     label.text = message;
     label.fontSize = 30;

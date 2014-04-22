@@ -51,12 +51,17 @@ static const NSInteger kDestroyedMonsterToLevel1    = 10;
 static const NSInteger kDestroyedMonsterToLevel2    = 30;
 static const NSInteger kDestroyedMonsterToLevel3    = 100;
 
+static const NSInteger kProjectileTotal = 50;
+
 @interface MainScene () <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong) SKSpriteNode *player;
+@property (nonatomic, strong) SKLabelNode *progressLabel;
 @property (nonatomic, assign) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic, assign) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic, assign) int monstersDestroyed;
+@property (nonatomic, assign) int projectileUsed;
+@property (nonatomic, assign) int projectileTotal;
 @property (nonatomic, assign) int level;
 
 @end
@@ -66,6 +71,8 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
 {
   if (self = [super initWithSize:size]) {
     self.level = 0;
+    self.projectileUsed = 0;
+    self.projectileTotal = kProjectileTotal;
     SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:kImageBackground];
     backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:backgroundNode];
@@ -73,11 +80,28 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
     self.player = [SKSpriteNode spriteNodeWithImageNamed:kImagePlayer];
     self.player.position = CGPointMake(self.player.size.width / 2, self.frame.size.height / 2);
     [self addChild:self.player];
-
+    
+    [self addProgressBar];
     self.physicsWorld.gravity = CGVectorMake(0, 0);
     self.physicsWorld.contactDelegate = self;
   }
   return self;
+}
+
+- (void)addProgressBar
+{
+  self.progressLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+  self.progressLabel.fontSize = 17;
+  self.progressLabel.fontColor = [SKColor blackColor];
+  self.progressLabel.position = CGPointMake(self.frame.size.width - 50, self.frame.size.height - 20);
+  [self addChild:self.progressLabel];
+  [self updateProgressBar];
+}
+
+- (void)updateProgressBar
+{
+  NSString *text = [NSString stringWithFormat:@"%d/%d", self.projectileUsed, self.projectileTotal];
+  self.progressLabel.text = text;
 }
 
 - (void)addMonsterWithPower:(NSInteger)power
@@ -94,7 +118,7 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
 
   int minDuration = 3;
   int maxDuration = 6;
-  
+
   if (self.level >= 2) {
     minDuration = 2;
   }
@@ -104,7 +128,7 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
   if (self.level >= 3) {
     maxDuration = 4;
   }
-  
+
   int rangeDuration = maxDuration - minDuration;
   int actualDuration = (arc4random() % rangeDuration) + minDuration;
 
@@ -112,9 +136,7 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
   SKAction *actionMoveDone = [SKAction removeFromParent];
 
   SKAction *loseAction = [SKAction runBlock:^{
-                            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                            SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
-                            [self.view presentScene:gameOverScene transition:reveal];
+                            [self gameOver];
                           }];
   [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
 
@@ -166,36 +188,21 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
   [self updateWithTimeSinceLastUpdate:timeSinceLast];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  [self runAction:[SKAction playSoundFileNamed:kSoundExplosion waitForCompletion:NO]];
-
-  UITouch *touch = [touches anyObject];
-  CGPoint location = [touch locationInNode:self];
-  CGPoint offset = rwSub(location, self.player.position);
-  if (offset.x <= 0) {
-    return;
-  }
-  
-  CGPoint direction = rwNormalize(offset);
-  [self addProjectileWithDirection:direction];
-}
-
 - (void)addProjectileWithDirection:(CGPoint)direction
 {
   SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithImageNamed:kImageProjectile];
   projectile.position = self.player.position;
-  
+
   [self addChild:projectile];
   CGPoint shootAmount = rwMult(direction, 1000);
   CGPoint realDest = rwAdd(shootAmount, projectile.position);
-  
+
   float velocity = 500 / 1.0;
   float realMoveDuration = self.size.width / velocity;
   SKAction *actionMove = [SKAction moveTo:realDest duration:realMoveDuration];
   SKAction *actionMoveDone = [SKAction removeFromParent];
   [projectile runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
-  
+
   projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width / 2];
   projectile.physicsBody.dynamic = YES;
   projectile.physicsBody.categoryBitMask = projectileCategory;
@@ -222,18 +229,24 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithMonster:(SKSpriteNode *)monster atPoint:(CGPoint)contactPoint
 {
   [self explosionAtCollidePoint:contactPoint];
+  [self runAction:[SKAction playSoundFileNamed:kSoundExplosion waitForCompletion:NO]];
   [projectile removeFromParent];
   [monster removeFromParent];
 
   self.monstersDestroyed++;
   [self addBigEffect];
   [self setLevelByMonstersDestroyed];
-  
-  if (self.monstersDestroyed > kKillMonstersForWin) {
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
-    [self.view presentScene:gameOverScene transition:reveal];
+
+  if (self.monstersDestroyed >= kKillMonstersForWin) {
+    [self gameOver];
   }
+}
+
+- (void)gameOver
+{
+  SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+  SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
+  [self.view presentScene:gameOverScene transition:reveal];
 }
 
 - (void)addBigEffect
@@ -247,14 +260,28 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
   if (self.monstersDestroyed % kWillAppearSuperProjectile == 0) {
     [self addSuperProjectile];
   }
+  if (self.monstersDestroyed % 40 == 0) {
+    if (self.monstersDestroyed * 1.0 / self.projectileUsed < 1.4) {
+      [self addProjectileNum:kProjectileTotal];
+    }
+  }
+}
+
+- (void)addProjectileNum:(int)num
+{
+  self.projectileTotal += num;
+  [self updateProgressBar];
+  [self runAction:[SKAction playSoundFileNamed:kSoundExplosion waitForCompletion:NO]];
 }
 
 - (void)setLevelByMonstersDestroyed
 {
   if (self.monstersDestroyed >= kDestroyedMonsterToLevel3) {
     self.level = 3;
+    [self addProjectileNum:kProjectileTotal * 2];
   } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel2) {
     self.level = 2;
+    [self addProjectileNum:kProjectileTotal];
   } else if (self.monstersDestroyed >= kDestroyedMonsterToLevel1) {
     self.level = 1;
   } else {
@@ -273,6 +300,26 @@ static const NSInteger kDestroyedMonsterToLevel3    = 100;
   SKAction *actionMoveDone = [SKAction removeFromParent];
   [explosion runAction:[SKAction sequence:@[actionBoom, actionMoveDone]]];
   explosion.physicsBody.dynamic = NO;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  UITouch *touch = [touches anyObject];
+  CGPoint location = [touch locationInNode:self];
+  CGPoint offset = rwSub(location, self.player.position);
+  if (offset.x <= 0) {
+    return;
+  }
+  
+  self.projectileUsed++;
+  [self updateProgressBar];
+  if (self.projectileUsed >= self.projectileTotal) {
+    [self gameOver];
+    return;
+  }
+  
+  CGPoint direction = rwNormalize(offset);
+  [self addProjectileWithDirection:direction];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
