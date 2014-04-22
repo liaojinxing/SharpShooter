@@ -45,7 +45,7 @@ static const uint32_t superMonsterCategory   =  0x1 << 3;
 static const NSInteger kKillMonstersForWin        = 1000;
 static const NSInteger kWillAppearBigMonster      = 10;
 static const NSInteger kWillAppearSuperMonster    = 27;
-static const NSInteger kWillAppearSuperProjectile = 13;
+static const NSInteger kWillAppearSuperProjectile = 39;
 
 static const NSInteger kDestroyedMonsterToLevel1    = 10;
 static const NSInteger kDestroyedMonsterToLevel2    = 30;
@@ -92,7 +92,7 @@ static const NSInteger kProjectileTotal = 50;
   self.projectileLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
   self.projectileLabel.fontSize = 16;
   self.projectileLabel.fontColor = [SKColor whiteColor];
-  self.projectileLabel.position = CGPointMake(100, self.frame.size.height - 20);
+  self.projectileLabel.position = CGPointMake(130, self.frame.size.height - 20);
   [self addChild:self.projectileLabel];
   [self updateProgressBar];
 }
@@ -117,16 +117,16 @@ static const NSInteger kProjectileTotal = 50;
   [self addChild:monster];
 
   int minDuration = 3;
-  int maxDuration = 6;
+  int maxDuration = 5;
 
   if (self.level >= 2) {
     minDuration = 2;
   }
   if (self.level > 0) {
-    maxDuration = 5;
+    maxDuration = 4;
   }
   if (self.level >= 3) {
-    maxDuration = 4;
+    maxDuration = 3;
   }
 
   int rangeDuration = maxDuration - minDuration;
