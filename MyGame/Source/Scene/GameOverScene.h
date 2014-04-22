@@ -8,8 +8,15 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+typedef NS_ENUM(NSInteger, GameOverReason) {
+  kProjectileUseUp = 0,
+  kKillAllMonsters,
+  kLoseMonster,
+};
+
+
 @interface GameOverScene : SKScene
 
--(id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums;
+-(id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums reason:(GameOverReason)reason;
 
 @end

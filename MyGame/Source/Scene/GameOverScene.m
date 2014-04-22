@@ -9,23 +9,42 @@
 #import "GameOverScene.h"
 #import "MainScene.h"
 @implementation GameOverScene
-- (id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums
+- (id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums reason:(GameOverReason)reason
 {
   if (self = [super initWithSize:size]) {
-    self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    self.backgroundColor = [SKColor colorWithRed:0.2 green:0.4 blue:0.2 alpha:1.0];
 
-    NSString *message = [NSString stringWithFormat:@"你击落了%ld 只怪兽！", hitNums];
-    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    label.text = message;
-    label.fontSize = 30;
-    label.fontColor = [SKColor blackColor];
-    label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
-    [self addChild:label];
+    NSString *reasonString = @"";
+    switch (reason) {
+      case kKillAllMonsters:
+        reasonString = @"哦耶！所有怪兽都挂了";
+        break;
+      case kProjectileUseUp:
+        reasonString = @"啊哦，没有更多的子弹了";
+      case kLoseMonster:
+        reasonString = @"哦漏，怪兽都跑家里来了";
+      default:
+        break;
+    }
+    SKLabelNode *reasonLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    reasonLabel.text = reasonString;
+    reasonLabel.fontSize = 30;
+    reasonLabel.fontColor = [SKColor blackColor];
+    reasonLabel.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+    [self addChild:reasonLabel];
+    
+    SKLabelNode *countLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    countLabel.text = [NSString stringWithFormat:@"你击落了%ld只怪兽！", hitNums];;
+    countLabel.fontSize = 30;
+    countLabel.fontColor = [SKColor blackColor];
+    countLabel.position = CGPointMake(self.size.width / 2, self.size.height / 2 - 40);
+    [self addChild:countLabel];
+    
 
     SKLabelNode *nextGameNode = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    nextGameNode.position = CGPointMake(self.frame.size.width - 100, 50);
+    nextGameNode.position = CGPointMake(self.frame.size.width - 70, 30);
     nextGameNode.name = @"NextGame";
-    nextGameNode.fontSize = 20;
+    nextGameNode.fontSize = 25;
     nextGameNode.text = @"再来一发";
     nextGameNode.fontColor = [SKColor redColor];
     [self addChild:nextGameNode];

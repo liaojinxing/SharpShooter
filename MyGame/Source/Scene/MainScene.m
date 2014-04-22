@@ -75,6 +75,7 @@ static const NSInteger kProjectileTotal = 50;
     self.projectileTotal = kProjectileTotal;
     SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:kImageBackground];
     backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    backgroundNode.size = size;
     [self addChild:backgroundNode];
 
     self.player = [SKSpriteNode spriteNodeWithImageNamed:kImagePlayer];
@@ -93,7 +94,7 @@ static const NSInteger kProjectileTotal = 50;
   self.progressLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
   self.progressLabel.fontSize = 17;
   self.progressLabel.fontColor = [SKColor blackColor];
-  self.progressLabel.position = CGPointMake(self.frame.size.width - 50, self.frame.size.height - 20);
+  self.progressLabel.position = CGPointMake(self.frame.size.width - 40, self.frame.size.height - 20);
   [self addChild:self.progressLabel];
   [self updateProgressBar];
 }
@@ -136,7 +137,7 @@ static const NSInteger kProjectileTotal = 50;
   SKAction *actionMoveDone = [SKAction removeFromParent];
 
   SKAction *loseAction = [SKAction runBlock:^{
-                            [self gameOver];
+                            [self gameOverWithReason:kLoseMonster];
                           }];
   [monster runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
 
@@ -238,14 +239,14 @@ static const NSInteger kProjectileTotal = 50;
   [self setLevelByMonstersDestroyed];
 
   if (self.monstersDestroyed >= kKillMonstersForWin) {
-    [self gameOver];
+    [self gameOverWithReason:kKillAllMonsters];
   }
 }
 
-- (void)gameOver
+- (void)gameOverWithReason:(GameOverReason)reason
 {
   SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-  SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed];
+  SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed reason:reason];
   [self.view presentScene:gameOverScene transition:reveal];
 }
 
@@ -314,7 +315,7 @@ static const NSInteger kProjectileTotal = 50;
   self.projectileUsed++;
   [self updateProgressBar];
   if (self.projectileUsed >= self.projectileTotal) {
-    [self gameOver];
+    [self gameOverWithReason:kProjectileUseUp];
     return;
   }
   
