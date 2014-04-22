@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C7A456D718F3A0520078B1C5"
                BuildableName = "MyGame.app"
                BlueprintName = "MyGame"
-               ReferencedContainer = "container:MyGame.xcodeproj">
+               ReferencedContainer = "container:SharpShooter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "C7A4570218F3A0520078B1C5"
                BuildableName = "MyGameTests.xctest"
                BlueprintName = "MyGameTests"
-               ReferencedContainer = "container:MyGame.xcodeproj">
+               ReferencedContainer = "container:SharpShooter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "C7A456D718F3A0520078B1C5"
             BuildableName = "MyGame.app"
             BlueprintName = "MyGame"
-            ReferencedContainer = "container:MyGame.xcodeproj">
+            ReferencedContainer = "container:SharpShooter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "C7A456D718F3A0520078B1C5"
             BuildableName = "MyGame.app"
             BlueprintName = "MyGame"
-            ReferencedContainer = "container:MyGame.xcodeproj">
+            ReferencedContainer = "container:SharpShooter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -82,7 +82,7 @@
             BlueprintIdentifier = "C7A456D718F3A0520078B1C5"
             BuildableName = "MyGame.app"
             BlueprintName = "MyGame"
-            ReferencedContainer = "container:MyGame.xcodeproj">
+            ReferencedContainer = "container:SharpShooter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

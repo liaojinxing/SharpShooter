@@ -325,7 +325,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C7A456D318F3A0520078B1C5 /* Build configuration list for PBXProject "MyGame" */;
+			buildConfigurationList = C7A456D318F3A0520078B1C5 /* Build configuration list for PBXProject "SharpShooter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -593,7 +593,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C7A456D318F3A0520078B1C5 /* Build configuration list for PBXProject "MyGame" */ = {
+		C7A456D318F3A0520078B1C5 /* Build configuration list for PBXProject "SharpShooter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7A4571218F3A0520078B1C5 /* Debug */,
