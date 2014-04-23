@@ -8,6 +8,8 @@
 
 #import "GameOverScene.h"
 #import "MainScene.h"
+#import "AppConstants.h"
+
 @implementation GameOverScene
 - (id)initWithSize:(CGSize)size hitNums:(NSInteger)hitNums reason:(GameOverReason)reason
 {
@@ -68,6 +70,7 @@
            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
            SKScene *myScene = [[MainScene alloc] initWithSize:self.size];
            [self.view presentScene:myScene transition:reveal];
+           [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationGameStart object:nil];
          }]
       ]]
     ];

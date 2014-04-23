@@ -255,6 +255,7 @@ static const NSInteger kProjectileTotal = 50;
   SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
   SKScene *gameOverScene = [[GameOverScene alloc] initWithSize:self.size hitNums:self.monstersDestroyed reason:reason];
   [self.view presentScene:gameOverScene transition:reveal];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationGameOver object:nil];
 }
 
 - (void)addBigEffect

@@ -21,3 +21,7 @@ extern NSString *const kImageBackground;
 // Sound
 extern NSString *const kSoundExplosion;
 extern NSString *const kSoundBackground;
+
+// Notification
+extern NSString *const kNotificationGameOver;
+extern NSString *const kNotificationGameStart;

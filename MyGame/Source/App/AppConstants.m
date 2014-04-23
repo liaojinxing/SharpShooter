@@ -22,3 +22,7 @@ NSString *const kImageBackground = @"desert";
 // sound
 NSString *const kSoundExplosion = @"pew-pew-lei.caf";
 NSString *const kSoundBackground = @"background-music-aac";
+
+// Notification
+NSString *const kNotificationGameOver = @"kNotificationGameOver";
+NSString *const kNotificationGameStart = @"kNotificationGameStart";
