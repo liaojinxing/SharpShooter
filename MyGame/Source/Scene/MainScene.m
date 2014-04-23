@@ -170,7 +170,15 @@ static const NSInteger kProjectileTotal = 50;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
   self.lastSpawnTimeInterval += timeSinceLast;
-  if (self.lastSpawnTimeInterval > 1) {
+  
+  CGFloat interval = 0.8;
+  if (self.level == 2) {
+    interval = 0.7;
+  } else if (self.level == 3) {
+    interval = 0.6;
+  }
+  
+  if (self.lastSpawnTimeInterval > interval) {
     self.lastSpawnTimeInterval = 0;
     [self addMonster];
   }
@@ -236,7 +244,7 @@ static const NSInteger kProjectileTotal = 50;
   self.monstersDestroyed++;
   [self addBigEffect];
   [self setLevelByMonstersDestroyed];
-
+  [self updateProgressBar];
   if (self.monstersDestroyed >= kKillMonstersForWin) {
     [self gameOverWithReason:kKillAllMonsters];
   }
